@@ -1,19 +1,21 @@
 import {
-  apply,
-  mergeWith,
   Rule,
-  SchematicContext,
   Tree,
-  url,
   SchematicsException,
+  apply,
+  url,
+  applyTemplates,
   move,
-  template,
+  chain,
+  mergeWith,
 } from "@angular-devkit/schematics";
-import { experimental, normalize, strings } from "@angular-devkit/core";
 
-//run using: npm run build -> schematics .:hello-component --name mycomp --greeting servus --debug false
-export function ngxsSchematics(_options: any): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
+import { strings, normalize, experimental } from "@angular-devkit/core";
+
+import { Schema as MyServiceSchema } from "./schema";
+
+export function myService(options: MyServiceSchema): Rule {
+  return (tree: Tree) => {
     const workspaceConfig = tree.read("/angular.json");
     if (!workspaceConfig) {
       throw new SchematicsException(
@@ -28,37 +30,29 @@ export function ngxsSchematics(_options: any): Rule {
     const workspace: experimental.workspace.WorkspaceSchema = JSON.parse(
       workspaceContent
     );
-
-    if (!_options.project) {
-      _options.project = workspace.defaultProject;
+    if (!options.project) {
+      options.project = workspace.defaultProject;
     }
 
-    const projectName = _options.project as string;
+    const projectName = options.project as string;
+
     const project = workspace.projects[projectName];
+
     const projectType = project.projectType === "application" ? "app" : "lib";
 
-    if (_options.path === undefined) {
-      _options.path = `${project.sourceRoot}/${projectType}`;
+    if (options.path === undefined) {
+      options.path = `${project.sourceRoot}/${projectType}`;
     }
 
-    //  const templateSource = apply(url("./files"), [
-    //    applyTemplates({
-    //     classify: strings.classify,
-    //      dasherize: strings.dasherize,
-    //      name: _options.name,
-    //    }),
-    //    move(normalize(_options.path as string)),
-    //  ]);
-
     const templateSource = apply(url("./files"), [
-      template({
-        ..._options,
-        ...strings,
-        name,
+      applyTemplates({
+        classify: strings.classify,
+        dasherize: strings.dasherize,
+        name: options.name,
       }),
-      move(normalize(_options.path as string)),
+      move(normalize(options.path as string)),
     ]);
 
-    return mergeWith(templateSource)(tree, _context);
+    return chain([mergeWith(templateSource)]);
   };
 }
