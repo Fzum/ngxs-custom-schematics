@@ -4,10 +4,10 @@ import {
   SchematicsException,
   apply,
   url,
-  applyTemplates,
   move,
   chain,
   mergeWith,
+  template,
 } from "@angular-devkit/schematics";
 
 import { strings, normalize, experimental } from "@angular-devkit/core";
@@ -45,11 +45,7 @@ export function ngxs(options: MyServiceSchema): Rule {
     }
 
     const templateSource = apply(url("./files"), [
-      applyTemplates({
-        classify: strings.classify,
-        dasherize: strings.dasherize,
-        name: options.name,
-      }),
+      template({ ...options, ...strings }),
       move(normalize(options.path as string)),
     ]);
 
