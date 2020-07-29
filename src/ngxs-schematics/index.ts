@@ -14,7 +14,7 @@ import { strings, normalize, experimental } from "@angular-devkit/core";
 
 import { Schema as MyServiceSchema } from "./schema";
 
-export function myService(options: MyServiceSchema): Rule {
+export function ngxs(options: MyServiceSchema): Rule {
   return (tree: Tree) => {
     const workspaceConfig = tree.read("/angular.json");
     if (!workspaceConfig) {

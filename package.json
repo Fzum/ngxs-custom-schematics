@@ -1,5 +1,5 @@
 {
-  "name": "@schematics/ngxs-schematics",
+  "name": "@schematics/ngxs",
   "version": "1.0.0",
   "description": "A blank schematics",
   "scripts": {

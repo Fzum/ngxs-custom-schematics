@@ -1,9 +1,9 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "ngxs-schematics": {
+    "ngxs": {
       "description": "Generate Container, View, Facade and Store",
-      "factory": "./ngxs-schematics/index#ngxsSchematics",
+      "factory": "./ngxs-schematics/index#ngxs",
       "schema": "./ngxs-schematics/schema.json"
     }
   }
