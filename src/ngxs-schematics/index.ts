@@ -7,10 +7,9 @@ import {
   url,
   SchematicsException,
   move,
-  applyTemplates,
-  chain,
+  template,
 } from "@angular-devkit/schematics";
-import { strings, experimental, normalize } from "@angular-devkit/core";
+import { experimental, normalize, strings } from "@angular-devkit/core";
 
 //run using: npm run build -> schematics .:hello-component --name mycomp --greeting servus --debug false
 export function ngxsSchematics(_options: any): Rule {
@@ -42,15 +41,24 @@ export function ngxsSchematics(_options: any): Rule {
       _options.path = `${project.sourceRoot}/${projectType}`;
     }
 
+    //  const templateSource = apply(url("./files"), [
+    //    applyTemplates({
+    //     classify: strings.classify,
+    //      dasherize: strings.dasherize,
+    //      name: _options.name,
+    //    }),
+    //    move(normalize(_options.path as string)),
+    //  ]);
+
     const templateSource = apply(url("./files"), [
-      applyTemplates({
-        classify: strings.classify,
-        dasherize: strings.dasherize,
-        name: _options.name,
+      template({
+        ..._options,
+        ...strings,
+        name,
       }),
       move(normalize(_options.path as string)),
     ]);
 
-    return chain([mergeWith(templateSource)]);
+    return mergeWith(templateSource)(tree, _context);
   };
 }
