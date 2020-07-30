@@ -3,9 +3,7 @@ import { <%= classify(name) %>FacadeService } from './<%= dasherize(name) %>.fac
 
 @Component({
     selector: 'app-<%= dasherize(name) %>-container',
-    template: `<app-<%= dasherize(name) %>-view
-    
-    ></app-<%= dasherize(name) %>-view>`
+    template: `<app-<%= dasherize(name) %>-view></app-<%= dasherize(name) %>-view>`
 })
 export class <%= classify(name) %>ContainerComponent {
     constructor(public storeService: <%= classify(name) %>FacadeService) {}

@@ -7,11 +7,11 @@ import {
 } from './<%= dasherize(name) %>.state';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class <%= classify(name) %>FacadeService {
   constructor() {}
 
-  @Selector(<%= classify(name) %>State)
+  @Select(<%= classify(name) %>State)
   <%= dasherize(name) %>state$: Observable<<%= classify(name) %>StateModel>;
 }

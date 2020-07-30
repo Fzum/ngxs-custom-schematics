@@ -18,7 +18,7 @@ export class <%= classify(name) %>State {
   @Action(<%= classify(name) %>ActionPayload)
   public react(
     ctx: StateContext<<%= classify(name) %>StateModel>,
-    { payload }: <%= classify(name) %>ActionPayload) {
+    { payload }: <%= classify(name) %>ActionPayload): void {
       ctx.patchState({});
   }
 
