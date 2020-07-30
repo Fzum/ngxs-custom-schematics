@@ -1,7 +1,10 @@
-import { Select, Store } from "@ngxs/store";
-import { <%= classify(name) %>State, <%= classify(name) %>StateModel } from "./store/state-<%= name %>";
-import { Dispatch } from "@ngxs-labs/dispatch-decorator";
+import { Select } from '@ngxs/store';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  <%= classify(name) %>State,
+  <%= classify(name) %>StateModel,
+} from './<%= dasherize(name) %>.state';
 
 @Injectable({
   providedIn: "root",
@@ -10,5 +13,5 @@ export class <%= classify(name) %>FacadeService {
   constructor() {}
 
   @Selector(<%= classify(name) %>State)
-  <%= name %>state$: Observable<<%= classify(name) %>StateModel>;
+  <%= dasherize(name) %>state$: Observable<<%= classify(name) %>StateModel>;
 }

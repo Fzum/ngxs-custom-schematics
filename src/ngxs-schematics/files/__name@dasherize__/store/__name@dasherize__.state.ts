@@ -1,4 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { <%= classify(name) %>ActionPayload } from './<%= dasherize(name) %>.actions';
 
 export interface <%= classify(name) %>StateModel {
 }
@@ -14,7 +15,7 @@ export class <%= classify(name) %>State {
     return undefined;
   }
 
-  @Action()
+  @Action(<%= classify(name) %>ActionPayload)
   public react(
     ctx: StateContext<<%= classify(name) %>StateModel>,
     { payload }: <%= classify(name) %>ActionPayload) {
