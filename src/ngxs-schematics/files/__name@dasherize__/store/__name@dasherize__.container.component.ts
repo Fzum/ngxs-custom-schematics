@@ -6,5 +6,7 @@ import { <%= classify(name) %>FacadeService } from './<%= dasherize(name) %>.fac
     template: `<app-<%= dasherize(name) %>-view></app-<%= dasherize(name) %>-view>`
 })
 export class <%= classify(name) %>ContainerComponent {
-    constructor(public storeService: <%= classify(name) %>FacadeService) {}
+    constructor(public service: <%= classify(name) %>FacadeService) {
+        service.dispatchAction();
+    }
 }
