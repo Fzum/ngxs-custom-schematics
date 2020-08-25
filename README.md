@@ -1,6 +1,6 @@
 # Bauen und Verpacken!!
 
-Zuerst ein `npm build` ausführen => .js files werden generiert. Dann ein `npm pack` ausführen. Es entsteht eine Datei mit dem Namen `schematics-ngxs-1.0.0.tgz`. Danach diese in ein beliebiges Angular Projekt integrieren und `npm install schematics-ngxs-1.0.0.tgz` ausführen. In dem Projekt kann das Schematic dann aufgerufen werden mit `ng g @schematics/ngxs:ngxs --name=Hello-World`.
+Zuerst ein `npm run build` ausführen => .js files werden generiert. Dann ein `npm pack` ausführen. Es entsteht eine Datei mit dem Namen `schematics-ngxs-1.0.0.tgz`. Danach diese in ein beliebiges Angular Projekt integrieren und `npm install schematics-ngxs-1.0.0.tgz` ausführen. In dem Projekt kann das Schematic dann aufgerufen werden mit `ng g @schematics/ngxs:ngxs --name=Hello-World`.
 
 # ngxs-custom-schematics
 

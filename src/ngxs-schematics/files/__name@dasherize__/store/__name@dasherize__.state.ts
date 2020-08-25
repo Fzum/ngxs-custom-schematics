@@ -1,26 +1,36 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, StateContext, Selector } from '@ngxs/store';
 import { <%= classify(name) %>ActionPayload } from './<%= dasherize(name) %>.actions';
+import { EmitterAction, Receiver } from '@ngxs-labs/emitter';
 
 export interface <%= classify(name) %>StateModel {
+  stuff: string;
 }
 
 @State<<%= classify(name) %>StateModel>({
   name: '<%= classify(name) %>',
   defaults: {
+    stuff: ''
   },
 })
 export class <%= classify(name) %>State {
   @Selector()
-  static selectSomething(state: <%= classify(name) %>StateModel): any {
-    return undefined;
+  static stuff(state: <%= classify(name) %>StateModel): string {
+    return state.stuff;
   }
 
-  @Action(<%= classify(name) %>ActionPayload)
-  public react(
+  @Receiver({ action: <%= classify(name) %>ActionPayload})
+  public static react(
     ctx: StateContext<<%= classify(name) %>StateModel>,
-    { payload }: <%= classify(name) %>ActionPayload): void {
-      ctx.patchState({});
+    { payload }: <%= classify(name) %>ActionPayload
+  ): void {
+    ctx.patchState({ stuff: payload });
   }
 
-
+  @Receiver()
+  public static fireAction(
+      ctx: StateContext<<%= classify(name) %>StateModel>,
+      { payload }: EmitterAction<string>
+  ): void {
+    ctx.patchState({ stuff: payload });
+  }
 }

@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./<%= dasherize(name) %>.view.component.scss'],
 })
 export class <%= classify(name) %>ViewComponent implements OnInit {
-    @Input() input: any;
+    @Input() stuff: string;
 
     @Output() output = new EventEmitter<any>();
 
